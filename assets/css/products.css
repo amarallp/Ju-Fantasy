@@ -1,0 +1,764 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    scroll-padding-top: 2rem;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+:root {
+    --main-color: #6C5B7B;
+    /* Lilás suave */
+    --text-color: #4A4A4A;
+    /* Cinza escuro suave */
+    --bg-color: #F5F5F5;
+    /* Branco levemente acinzentado */
+    --hover-color: #355C7D;
+    /* Azul suave para hover */
+    --header-bg: #FFFFFF;
+    /* Branco puro para o cabeçalho */
+    --footer-bg: #E8E8E8;
+    /* Cinza claro suave para o rodapé */
+    --button-hover: #C06C84;
+    /* Rosa suave para hover de botões */
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+}
+
+img {
+    width: 100%;
+}
+
+body {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--header-bg);
+    box-shadow: 0 1px 4px var(--shadow-color);
+    z-index: 100;
+    padding: 10px 0;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.container {
+    max-width: 1068px;
+    margin: auto;
+    width: 100%;
+}
+
+.esgotado {
+    color: red;
+}
+
+section {
+    padding: 4rem 0 3rem;
+}
+
+.logo img {
+    width: 100px;
+    height: auto;
+    display: block;
+}
+
+#cart-icon {
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+/* Estilo do menu de opções */
+.dropdown-menu {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown span {
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 10px;
+    transition: color 0.3s ease;
+}
+
+.dropdown span:hover {
+    color: var(--main-color);
+}
+
+/* Ajusta a largura do dropdown */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--bg-color);
+    box-shadow: 0 4px 8px var(--shadow-color);
+    z-index: 1000;
+    width: max-content;
+    /* Ajusta o tamanho ao conteúdo */
+    max-height: 300px;
+    overflow-y: auto;
+    border-radius: 5px;
+    padding: 10px;
+    right: 0;
+    /* Garante que não ultrapasse a tela */
+    left: auto;
+}
+
+/* Melhorando o espaçamento dos itens da lista */
+.dropdown-content ul {
+    column-count: 1;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-content ul li {
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap;
+    /* Evita quebra de texto */
+}
+
+.dropdown-content ul li:hover {
+    background-color: #E0E0E0;
+}
+
+.dropdown-content ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+/* Estilo da barra de rolagem */
+.dropdown-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dropdown-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Cor da barra de rolagem ao passar o mouse */
+}
+
+/* Mostrar a lista ao passar o mouse */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/*Cart */
+
+.cart {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 360px;
+    padding: 20px;
+    background: var(--bg-color);
+    box-shadow: -2px 0 4px hsl(0 4% 15% / 10%);
+    transition: 0.3s;
+    height: 100vh;
+}
+
+.footer-cart {
+    height: 20%;
+}
+
+.header-cart {
+    height: 10%;
+}
+
+.cart-content {
+    overflow-y: auto;
+    height: 70%;
+}
+
+.cart.active {
+    right: 0;
+}
+
+.cart-title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.cart-box {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.cart-img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    padding: 10px;
+}
+
+.detail-box {
+    display: grid;
+    row-gap: 0.5rem;
+    margin-right: auto;
+    width: 60%;
+}
+
+.cart-product-title {
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.cart-price {
+    font-weight: 500;
+}
+
+.cart-quantity {
+    border: 1px solid var(--text-color);
+    outline-color: var(--main-color);
+    width: 2.4rem;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.cart-remove {
+    font-size: 24px;
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+.total {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--text-color);
+}
+
+.total-title {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.total-price {
+    margin-left: 0.5rem;
+}
+
+.btn-buy {
+    display: flex;
+    margin: 1.5rem auto 0 auto;
+    padding: 12px 20px;
+    border: none;
+    background: var(--main-color);
+    color: var(--bg-color);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn-buy:hover {
+    background: var(--text-color);
+}
+
+#close-cart {
+    position: absolute;
+    top: 1rem;
+    right: 0.8rem;
+    font-size: 2rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    margin-top: 20px;
+}
+
+.shop {
+    margin-top: 60px;
+    /* Espaçamento superior igual à altura do header */
+}
+
+/* Shop Content */
+.shop-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+    gap: 1.5rem;
+}
+
+.product-box {
+    position: relative;
+}
+
+.product-box:hover {
+    padding: 10px;
+    border: 1px solid var(--text-color);
+    transition: 0.4s;
+}
+
+.product-img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 0.5rem;
+}
+
+.product-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.price {
+    font-weight: 500;
+
+}
+
+.add-cart {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: var(--text-color);
+    color: var(--bg-color);
+    padding: 10px;
+    cursor: pointer;
+}
+
+.add-cart:hover {
+    background: hsl(249, 32%, 17%);
+}
+
+/* Rodape */
+
+/* Estilos gerais do rodapé */
+footer {
+    background-color: #F7F7F7;
+    color: black;
+    padding: 40px 20px;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Estilo da primeira div (Logo e texto) */
+.footer-logo {
+    flex: 1;
+    min-width: 250px;
+    text-align: left;
+}
+
+.footer-logo img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.footer-logo p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+/* Estilo da segunda div (Contato) */
+.footer-contact {
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-contact h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.footer-contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-contact ul li {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    /* Altera a direção do flex para coluna */
+    align-items: flex-start;
+    /* Alinha os itens à esquerda */
+}
+
+.footer-contact ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    margin-top: 5px;
+    /* Adiciona um pequeno espaço entre o <p> e o link */
+}
+
+.footer-contact ul li a i {
+    font-size: 1.2rem;
+    /* Tamanho dos ícones */
+    transition: all 0.3s ease;
+    /* Transição suave para o ícone */
+}
+
+/* Efeito hover nos links */
+.footer-contact ul li a:hover {
+    color: var(--main-color);
+    /* Cor ao passar o mouse */
+    transform: translateX(5px);
+    /* Movimento suave para a direita */
+}
+
+.footer-contact ul li a:hover i {
+    color: var(--main-color);
+    /* Cor do ícone ao passar o mouse */
+}
+
+/* Linha vertical separadora */
+.footer-contact ul li.separator {
+    height: 1px;
+    background-color: #ccc;
+    margin: 10px 0;
+}
+
+/* Estilo da terceira div: Formas de envio */
+.footer-shipping {
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+}
+
+.footer-shipping h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.shipping-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    /* Espaçamento entre os itens */
+}
+
+.shipping-icons span {
+    padding: 0 10px;
+    /* Espaçamento interno */
+    position: relative;
+    /* Para posicionar o separador */
+}
+
+/* Adiciona um separador horizontal entre os itens */
+.shipping-icons span:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -5px;
+    /* Posiciona o separador à direita */
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60%;
+    /* Altura do separador */
+    width: 1px;
+    background-color: #ccc;
+    /* Cor do separador */
+}
+
+.dropdown-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    column-count: 1;
+    column-gap: 20px;
+    column-width: 155px;
+    /* Adicione essa linha */
+}
+
+/* Ajustes gerais para responsividade */
+@media (max-width: 1080px) {
+    .nav {
+        padding: 15px;
+    }
+
+    section {
+        padding: 3rem 0 2rem;
+    }
+
+    .container {
+        margin: 0 auto;
+        width: 90%;
+    }
+
+    .shop {
+        margin-top: 2rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo {
+        display: inline-block;
+        margin-right: auto;
+    }
+
+    .dropdown-menu {
+        display: flex;
+        flex-wrap: wrap;
+        /* Mantém os itens lado a lado */
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .dropdown {
+        position: relative;
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .dropdown span {
+        font-size: 1rem;
+        padding: 8px;
+    }
+
+    .dropdown-content {
+        position: absolute;
+        top: 40px;
+        /* Ajuste para alinhar com a logo/cart-icon */
+        background-color: var(--bg-color);
+        box-shadow: 0 4px 8px var(--shadow-color);
+        z-index: 1000;
+        width: max-content;
+        max-width: 90vw;
+        max-height: 250px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        border-radius: 5px;
+        padding: 8px;
+        right: 0;
+        left: auto;
+    }
+
+    /* Alinha dropdowns que estão no lado esquerdo (como Hotwheels) */
+    .dropdown:first-child .dropdown-content {
+        left: 0;
+        right: auto;
+    }
+
+    /* Garante que o último dropdown não ultrapasse a tela */
+    .dropdown:last-child .dropdown-content {
+        right: 0;
+        left: auto;
+    }
+
+    /* Para os dropdowns no meio, mantém o alinhamento automático */
+    .dropdown:not(:first-child):not(:last-child) .dropdown-content {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .dropdown-content ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-content ul li {
+        padding: 10px;
+        text-align: left;
+        white-space: nowrap;
+        font-size: 0.9rem;
+    }
+
+    .dropdown-content ul li:hover {
+        background-color: #E0E0E0;
+    }
+
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    #cart-icon {
+        position: absolute;
+        top: 45px;
+        right: 20px;
+    }
+
+    .cart {
+        width: 100%;
+        right: -100%;
+    }
+
+    .cart.active {
+        right: 0;
+    }
+
+    .shop-content {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+
+    .product-box {
+        padding: 5px;
+    }
+
+    .product-title {
+        font-size: 1.2rem;
+    }
+
+    .price {
+        font-size: 0.9rem;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-logo {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .footer-contact ul li {
+        align-items: center;
+    }
+
+    .footer-shipping {
+        margin-top: 20px;
+    }
+
+    .shipping-icons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .shipping-icons span {
+        margin: 5px 0;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+    }
+
+    .btn-buy {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+
+
+
+    @media (max-width: 480px) {
+        .nav {
+            padding: 11px;
+        }
+
+        .dropdown span {
+            font-size: 0.9rem;
+            padding: 6px;
+        }
+
+        .dropdown-content {
+            top: 38px;
+            /* Ajuste fino para telas menores */
+            max-width: 85vw;
+            max-height: 220px;
+            padding: 6px;
+        }
+
+        .dropdown-content ul li {
+            font-size: 0.85rem;
+            padding: 8px;
+        }
+
+        .logo {
+            font-size: 1rem;
+        }
+
+        .cart {
+            width: 280px;
+        }
+
+        .shop-content {
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        }
+
+        .product-title {
+            font-size: 1rem;
+        }
+
+        .price {
+            font-size: 0.8rem;
+        }
+
+        .section-title {
+            font-size: 1rem;
+        }
+
+        .btn-buy {
+            padding: 8px 12px;
+            font-size: 0.8rem;
+        }
+
+        .margin-bottom {
+            margin-bottom: 120px;
+        }
+    }
+}
