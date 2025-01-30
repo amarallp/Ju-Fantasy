@@ -82,17 +82,25 @@ function ready() {
     // wpp button work 
     // Função para enviar o carrinho via WhatsApp
     function sendCartToWhatsApp() {
-        // Seleciona o conteúdo do carrinho
         var cartContent = document.querySelector(".cart-content");
         var cartBoxes = cartContent.getElementsByClassName("cart-box");
 
-        // Verifica se o carrinho está vazio
         if (cartBoxes.length === 0) {
-            alert("Seu carrinho está vazio. Adicione produtos antes de enviar.");
+            Toastify({
+                text: "Seu carrinho está vazio! Adicione produtos antes de enviar.",
+                duration: 3000,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    background: "linear-gradient(to right, #000000, #333333, #666666, #999999)",
+                },
+                onClick: function () { } // Callback after click
+            }).showToast();
             return;
         }
 
-        // Cria a mensagem com os itens do carrinho
         var message = "Olá Ju Fantasy, gostaria de comprar os seguintes carrinhos:\n\n";
         for (var i = 0; i < cartBoxes.length; i++) {
             var cartBox = cartBoxes[i];
@@ -103,7 +111,6 @@ function ready() {
             message += `- ${title} (Quantidade: ${quantity}, Preço: ${price})\n`;
         }
 
-        // Adiciona o total ao final da mensagem
         var totalPrice = document.querySelector(".total-price").innerText;
         message += `\nTotal: ${totalPrice}`;
 
@@ -161,7 +168,18 @@ function ready() {
         var cartItemsNames = cartItems.getElementsByClassName("cart-product-title");
         for (var i = 0; i < cartItemsNames.length; i++) {
             if (cartItemsNames[i].innerText == title) {
-                alert("Você já selecionou esse item.");
+                Toastify({
+                    text: "Este produto já foi adicionado ao carrinho!",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "linear-gradient(to right, #000000, #333333, #666666, #999999)",
+                    },
+                    onClick: function () { } // Callback after click
+                }).showToast();
                 return;
             }
         }
@@ -170,7 +188,7 @@ function ready() {
         <img loading="lazy" src ="${productImg}" alt="" class="cart-img">
         <div class="detail-box">
             <div class="cart-product-title">${title}</div>
-            <div class="cart-price">${price}</div>
+            <div class="cart-price">R$${price.replace("R$", "").trim()}</div>
             <input type="number" value="1" class="cart-quantity">
         </div>
         <!--Remove Cart-->
@@ -179,7 +197,18 @@ function ready() {
         cartShopBox.innerHTML = cartBoxContent;
         cartItems.append(cartShopBox);
         // Adicionar o alerta aqui
-        alert("Produto adicionado"); // <--- Nova linha adicion
+        Toastify({
+            text: "Produto adicionado ao carrinho com sucesso!",
+            duration: 3000,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+                background: "linear-gradient(to right, #000000, #333333, #666666, #999999)",
+            },
+            onClick: function () { } // Callback after click
+        }).showToast();
         saveCartItems();
         cartShopBox
             .getElementsByClassName("cart-remove")[0]
@@ -198,15 +227,20 @@ function ready() {
             var cartBox = cartBoxes[i];
             var priceElement = cartBox.getElementsByClassName("cart-price")[0];
             var quantityElement = cartBox.getElementsByClassName("cart-quantity")[0];
-            var price = parseFloat(priceElement.innerText.replace("$", ""));
+
+            // Remove o "R$" e converte o valor para número
+            var price = parseFloat(priceElement.innerText.replace("R$", "").replace(",", ".").trim());
             var quantity = quantityElement.value;
+
+            // Calcula o total
             total += price * quantity;
         }
-        // if price contains cents value 
-        total = Math.round(total * 100) / 100;
 
-        // Atualiza o valor total no formato correto
-        document.getElementsByClassName("total-price")[0].innerText = total + " $";
+        // Formata o total como moeda brasileira (R$)
+        total = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+        // Atualiza o valor total no carrinho
+        document.getElementsByClassName("total-price")[0].innerText = total;
     }
 
     // Define o tema fixo (exemplo: claro)
