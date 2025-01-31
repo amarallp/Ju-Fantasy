@@ -90,7 +90,7 @@ function ready() {
                 text: "Seu carrinho está vazio! Adicione produtos antes de enviar.",
                 duration: 3000,
                 close: true,
-                gravity: "top", // `top` or `bottom`
+                gravity: "bottom", // `top` or `bottom`
                 position: "center", // `left`, `center` or `right`
                 stopOnFocus: true, // Prevents dismissing of toast on hover
                 style: {
@@ -172,7 +172,7 @@ function ready() {
                     text: "Este produto já foi adicionado ao carrinho!",
                     duration: 3000,
                     close: true,
-                    gravity: "top", // `top` or `bottom`
+                    gravity: "bottom", // `top` or `bottom`
                     position: "center", // `left`, `center` or `right`
                     stopOnFocus: true, // Prevents dismissing of toast on hover
                     style: {
@@ -201,7 +201,7 @@ function ready() {
             text: "Produto adicionado ao carrinho com sucesso!",
             duration: 3000,
             close: true,
-            gravity: "top", // `top` or `bottom`
+            gravity: "bottom", // `top` or `bottom`
             position: "center", // `left`, `center` or `right`
             stopOnFocus: true, // Prevents dismissing of toast on hover
             style: {
