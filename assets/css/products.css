@@ -763,3 +763,27 @@ footer {
         }
     }
 }
+
+@media (max-width: 360px) {
+    /* Header ultra compacto */
+    .dropdown-menu {
+        gap: 6px;
+    }
+
+    /* Itens de menu mínimos */
+    .dropdown span {
+        font-size: 0.78rem;
+        padding: 5px 6px;
+    }
+
+    /* Dropdowns mais estreitos */
+    .dropdown-content {
+        min-width: 120px;
+        right: -5px; /* Alinhamento para dropdowns à direita */
+    }
+
+    /* Remove espaçamento interno excessivo */
+    .dropdown-content ul li {
+        padding: 6px 8px;
+    }
+}
