@@ -73,8 +73,13 @@ section {
     padding: 4rem 0 3rem;
 }
 
+.logo {
+    flex-shrink: 0; /* Impede que a logo encolha demais */
+    transition: all 0.3s ease;
+  }
+
 .logo img {
-    width: 100px;
+    width: 70px;
     height: auto;
     display: block;
 }
