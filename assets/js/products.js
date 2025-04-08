@@ -90,8 +90,8 @@ function ready() {
                 text: "Seu carrinho está vazio! Adicione produtos antes de enviar.",
                 duration: 3000,
                 close: true,
-                gravity: "bottom", // `top` or `bottom`
-                position: "center", // `left`, `center` or `right`
+                gravity: "bottom", // top or bottom
+                position: "center", // left, center or right
                 stopOnFocus: true, // Prevents dismissing of toast on hover
                 style: {
                     background: "linear-gradient(to right, #000000, #333333, #666666, #999999)",
@@ -101,16 +101,16 @@ function ready() {
             return;
         }
 
-        var message = "Olá Ju Fantasy, gostaria de comprar os seguintes carrinhos:\n\n";
+        var message = "Olá Ju Fantasy, me interessei nos seguintes carrinhos:\n\n";
         for (var i = 0; i < cartBoxes.length; i++) {
             var cartBox = cartBoxes[i];
             var title = cartBox.querySelector(".cart-product-title").innerText;
             var quantity = cartBox.querySelector(".cart-quantity").value;
 
-            message += `- ${title} (Quantidade: ${quantity}, Preço: ${price})\n`;
+            message += `- ${title} (Quantidade: ${quantity})\n`;
         }
 
-        message += `\nTotal de itens: ${cartBoxes.length}`;
+        message += `\nTotal de itens: ${cartBoxes.length}`; 
 
         // Número de telefone (substitua pelo número desejado)
         var phoneNumber = "5521967338323"; // Exemplo: 55 (Brasil) + DDD + Número
@@ -118,10 +118,7 @@ function ready() {
         // Codifica a mensagem para URL
         var encodedMessage = encodeURIComponent(message);
 
-        // Cria o link do WhatsApp
-        var whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
-        // Redireciona para o WhatsApp
+        var whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`; // <-- Crases adicionadas
         window.open(whatsappLink, "_blank");
     }
 
@@ -153,7 +150,6 @@ function ready() {
         var button = event.target;
         var shopProducts = button.parentElement;
         var title = shopProducts.getElementsByClassName("product-title")[0].innerText;
-        var price = shopProducts.getElementsByClassName("price")[0].innerText;
         var productImg = shopProducts.getElementsByClassName("product-img")[0].src;
         addProductToCart(title,productImg);
         updatetotal();
@@ -170,8 +166,8 @@ function ready() {
                     text: "Este produto já foi adicionado ao carrinho!",
                     duration: 3000,
                     close: true,
-                    gravity: "bottom", // `top` or `bottom`
-                    position: "center", // `left`, `center` or `right`
+                    gravity: "bottom", // top or bottom
+                    position: "center", // left, center or right
                     stopOnFocus: true, // Prevents dismissing of toast on hover
                     style: {
                         background: "linear-gradient(to right, #000000, #333333, #666666, #999999)",
@@ -198,8 +194,8 @@ function ready() {
             text: "Produto adicionado ao carrinho com sucesso!",
             duration: 3000,
             close: true,
-            gravity: "bottom", // `top` or `bottom`
-            position: "center", // `left`, `center` or `right`
+            gravity: "bottom", // top or bottom
+            position: "center", // left, center or right
             stopOnFocus: true, // Prevents dismissing of toast on hover
             style: {
                 background: "linear-gradient(to right, #000000, #333333, #666666, #999999)",
@@ -219,18 +215,19 @@ function ready() {
     function updatetotal() {
         var cartContent = document.getElementsByClassName("cart-content")[0];
         var cartBoxes = cartContent.getElementsByClassName("cart-box");
-        var totalItems = cartBoxes.length;
+        var totalItems = 0;
 
-        document.getElementsByClassName("total-price")[0].innerText = 
-        `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
+         // Soma as quantidades de todos os produtos
+    for (var i = 0; i < cartBoxes.length; i++) {
+        var quantityInput = cartBoxes[i].querySelector(".cart-quantity");
+        totalItems += parseInt(quantityInput.value); // Converte para número e soma
+    }
+
+    document.getElementsByClassName("total-price")[0].innerText = 
+    totalItems === 1 ? "1 item" : `${totalItems} itens`;
 
         }
 
-        // Formata o total como moeda brasileira (R$)
-        total = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
-        // Atualiza o valor total no carrinho
-        document.getElementsByClassName("total-price")[0].innerText = total;
     }
 
     // Define o tema fixo (exemplo: claro)
@@ -273,6 +270,3 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
-
-
-

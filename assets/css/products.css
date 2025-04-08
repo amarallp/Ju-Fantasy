@@ -280,7 +280,7 @@ section {
     margin: 1.5rem auto 0 auto;
     padding: 12px 20px;
     border: none;
-    background: var(--main-color);
+    background: black;
     color: var(--bg-color);
     font-size: 1rem;
     font-weight: 500;
