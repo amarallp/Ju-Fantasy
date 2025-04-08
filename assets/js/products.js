@@ -105,14 +105,12 @@ function ready() {
         for (var i = 0; i < cartBoxes.length; i++) {
             var cartBox = cartBoxes[i];
             var title = cartBox.querySelector(".cart-product-title").innerText;
-            var price = cartBox.querySelector(".cart-price").innerText;
             var quantity = cartBox.querySelector(".cart-quantity").value;
 
             message += `- ${title} (Quantidade: ${quantity}, Preço: ${price})\n`;
         }
 
-        var totalPrice = document.querySelector(".total-price").innerText;
-        message += `\nTotal: ${totalPrice}`;
+        message += `\nTotal de itens: ${cartBoxes.length}`;
 
         // Número de telefone (substitua pelo número desejado)
         var phoneNumber = "5521967338323"; // Exemplo: 55 (Brasil) + DDD + Número
@@ -157,11 +155,11 @@ function ready() {
         var title = shopProducts.getElementsByClassName("product-title")[0].innerText;
         var price = shopProducts.getElementsByClassName("price")[0].innerText;
         var productImg = shopProducts.getElementsByClassName("product-img")[0].src;
-        addProductToCart(title, price, productImg);
+        addProductToCart(title,productImg);
         updatetotal();
     }
 
-    function addProductToCart(title, price, productImg) {
+    function addProductToCart(title, productImg) {
         var cartShopBox = document.createElement("div");
         cartShopBox.classList.add("cart-box");
         var cartItems = document.getElementsByClassName("cart-content")[0];
@@ -188,7 +186,6 @@ function ready() {
         <img loading="lazy" src ="${productImg}" alt="" class="cart-img">
         <div class="detail-box">
             <div class="cart-product-title">${title}</div>
-            <div class="cart-price">R$${price.replace("R$", "").trim()}</div>
             <input type="number" value="1" class="cart-quantity">
         </div>
         <!--Remove Cart-->
@@ -222,18 +219,11 @@ function ready() {
     function updatetotal() {
         var cartContent = document.getElementsByClassName("cart-content")[0];
         var cartBoxes = cartContent.getElementsByClassName("cart-box");
-        var total = 0;
-        for (var i = 0; i < cartBoxes.length; i++) {
-            var cartBox = cartBoxes[i];
-            var priceElement = cartBox.getElementsByClassName("cart-price")[0];
-            var quantityElement = cartBox.getElementsByClassName("cart-quantity")[0];
+        var totalItems = cartBoxes.length;
 
-            // Remove o "R$" e converte o valor para número
-            var price = parseFloat(priceElement.innerText.replace("R$", "").replace(",", ".").trim());
-            var quantity = quantityElement.value;
+        document.getElementsByClassName("total-price")[0].innerText = 
+        `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
 
-            // Calcula o total
-            total += price * quantity;
         }
 
         // Formata o total como moeda brasileira (R$)
@@ -262,7 +252,6 @@ function ready() {
     // Aplica o tema fixo ao carregar o site
     applyFixedTheme();
     disableSystemThemeChange();
-}
 
 document.addEventListener("DOMContentLoaded", function () {
     const dropdowns = document.querySelectorAll(".dropdown");
